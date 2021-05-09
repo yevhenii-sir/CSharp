@@ -18,21 +18,19 @@ namespace Basic_Learn_Csharp
             office.Area = 4200;
             office.Floors = 3;
 
-            areaPP = house.Area / house.Occupants;
-
             Console.WriteLine("Дом имеет:\n" +
                 house.Floors + " этажа\n" + 
                 house.Occupants + " жильца\n" +
-                house.Area + " кв. футов общей площади, из них \n" + 
-                areaPP + " приходиться на одного человека\n");
+                house.Area + " кв. футов общей площади, из них ");
+            house.AreaPerPerson();
 
-            areaPP = office.Area / office.Occupants;
+            Console.WriteLine();
 
             Console.WriteLine("Учреждение имеет:\n" +
                 office.Floors + " этажа\n" +
                 office.Occupants + " работников\n" +
-                office.Area + " кв. футов общей площади, из них \n" +
-                areaPP + " приходиться на одного человека");
+                office.Area + " кв. футов общей площади, из них");
+            office.AreaPerPerson();
         }
     }
 }
