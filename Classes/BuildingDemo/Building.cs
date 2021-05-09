@@ -8,10 +8,9 @@ namespace Basic_Learn_Csharp
         public int Area;
         public int Occupants;
 
-        public void AreaPerPerson()
+        public int AreaPerPerson()
         {
-            Console.WriteLine(Area / Occupants + 
-                " приходиться на одного человека");
+            return Area / Occupants;
         }
     }
 }
