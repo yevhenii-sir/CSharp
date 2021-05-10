@@ -17,20 +17,15 @@ namespace Basic_Learn_Csharp
             office.Area = 4200;
             office.Floors = 3;
 
-            Console.WriteLine("Дом имеет:\n" +
-                house.Floors + " этажа\n" + 
-                house.Occupants + " жильца\n" +
-                house.Area + " кв. футов общей площади, из них \n" + 
-                house.AreaPerPerson() + " приходиться на одного человека\n");
-            house.AreaPerPerson();
+            Console.WriteLine("Максимальное количество человек в доме, \n" + 
+                "если на каждого должно приходиться " + 300 +
+                " кв. футов: " + house.MaxOccupant(300));
 
             Console.WriteLine();
 
-            Console.WriteLine("Учреждение имеет:\n" +
-                office.Floors + " этажа\n" +
-                office.Occupants + " работников\n" +
-                office.Area + " кв. футов общей площади, из них \n" +
-                office.AreaPerPerson() + " приходиться на одного человека");
+            Console.WriteLine("Максимальное количество человек в доме, \n" +
+                "если на каждого должно приходиться " + 300 +
+                " кв. футов: " + office.MaxOccupant(300));
         }
     }
 }

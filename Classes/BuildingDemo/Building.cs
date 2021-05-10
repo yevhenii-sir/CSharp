@@ -12,5 +12,10 @@ namespace Basic_Learn_Csharp
         {
             return Area / Occupants;
         }
+
+        public int MaxOccupant(int minArea)
+        {
+            return Area / minArea;
+        }
     }
 }
