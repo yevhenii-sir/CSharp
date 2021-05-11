@@ -7,10 +7,10 @@ namespace Basic_Learn_Csharp
         public int Width;
         public int Height;
 
-        public Rect(int w, int h)
+        public Rect(int Width, int Height)
         {
-            Width = w;
-            Height = h;
+            this.Width = Width;
+            this.Height = Height;
         }
 
         public int Area()
