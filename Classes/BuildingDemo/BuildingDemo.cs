@@ -6,16 +6,8 @@ namespace Basic_Learn_Csharp
     {
         static void Main()
         {
-            Building house = new Building();
-            Building office = new Building();
-
-            house.Occupants = 4;
-            house.Area = 2500;
-            house.Floors = 2;
-
-            office.Occupants = 25;
-            office.Area = 4200;
-            office.Floors = 3;
+            Building house = new Building(2, 2500, 4);
+            Building office = new Building(3, 4200, 25);
 
             Console.WriteLine("Максимальное количество человек в доме, \n" + 
                 "если на каждого должно приходиться " + 300 +
