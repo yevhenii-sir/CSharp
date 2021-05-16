@@ -25,7 +25,7 @@ namespace BasicLearnCSharp
             
             Console.WriteLine();
             
-            Console.WriteLine("Вывод строки str1 правильно.");
+            Console.WriteLine("Вывод строки str1 правильно. ");
             for (int i = 0; i < str1.Length; i++)
                 Console.Write(str1[i]);
             
@@ -45,13 +45,13 @@ namespace BasicLearnCSharp
 
             if (result == 0)
             {
-                Console.WriteLine("Строки и равны");
+                Console.WriteLine("Строки str1 и str3 равны");
             }
             else if (result < 0)
             {
-                Console.WriteLine("Строка меньше строки ");
+                Console.WriteLine("Строка str1 меньше строки str3");
             }
-            else Console.WriteLine("Строка больше строки");
+            else Console.WriteLine("Строка str1 больше строки str3");
             
             Console.WriteLine();
 
