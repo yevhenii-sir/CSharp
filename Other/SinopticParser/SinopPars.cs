@@ -12,6 +12,8 @@ namespace ParsTest
         static void Main(string[] args)
         {
             string myUrl = "https://sinoptik.ua/%D0%BF%D0%BE%D0%B3%D0%BE%D0%B4%D0%B0-"; 
+            
+            Console.Write("Введите место для просмотра текущей температуры: ");
             string location = Console.ReadLine();
             myUrl += location;
 
@@ -29,9 +31,9 @@ namespace ParsTest
                 var pars2 = Regex.Split(pars1[1], " ");
 
                 var temp = Convert.ToInt32(pars2[0].Substring(0, pars2[0].IndexOf('&')));
-                //или int temp = Convert.ToInt32(Regex.Replace(pars2[0], @"[^\d]+", ""));
+                //int temp = Convert.ToInt32(Regex.Replace(pars2[0], @"[^\d]+", ""));
 
-                Console.WriteLine("Температура в \"" + location + "\": " + temp + ", время - " +
+                Console.WriteLine("Температура в \"" + location + "\": " + temp + "°С, время - " +
                                   System.DateTime.Now.ToLongTimeString() + ".");
             }
             catch
