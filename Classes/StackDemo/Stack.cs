@@ -13,6 +13,18 @@ namespace BasicLearnCSharp
             tos = 0;
         }
 
+        public Stack(Stack ob)
+        {
+            stk = new char[ob.stk.Length];
+
+            for (int i = 0; i < ob.tos; i++)
+            {
+                stk[i] = ob.stk[i];
+            }
+
+            tos = ob.tos;
+        }
+
         public void Push(char ch)
         {
             if (tos == stk.Length)
