@@ -12,7 +12,7 @@ namespace BasicLearnCSharp
 
             for (int i = start; i < stop; i++)
             {
-                    Console.Write(str[i]);
+                Console.Write(str[i]);
             }
                 
             Console.WriteLine();
@@ -20,9 +20,11 @@ namespace BasicLearnCSharp
         
         static void Main(string[] args)
         {
-             Display("Это простой тест");
-             Display("Это простой тест", 12);
-             Display("Это простой тест", 4, 14);
+            Display("Это простой тест");
+            Display("Это простой тест", 12);
+            Display("Это простой тест", 4, 14);
+            Display(start: 4, stop: 14, str:"Это простой тест");
+            Display(stop: 14, str: "Это простой тест", start: 4);
         }
     }
 }
