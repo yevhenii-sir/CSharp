@@ -6,7 +6,7 @@ namespace BasicLearnCSharp
     {
         private int a, b;
 
-        public MyClass Factory(int i, int j)
+        public static MyClass Factory(int i, int j)
         {
             MyClass t = new MyClass();
 
