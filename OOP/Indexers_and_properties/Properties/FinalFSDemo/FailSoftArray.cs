@@ -3,30 +3,16 @@ namespace BasicLearnCSharp
     public class FailSoftArray
     {
         private int[] a;
-        private int len; 
-        private bool ErrFlag;
 
         public FailSoftArray(int size)
         {
             a = new int[size];
-            len = size;
+            Length = size;
         }
 
-        public bool Error
-        {
-            get
-            {
-                return ErrFlag;
-            }
-        }
+        public int Length { get; private set; }
 
-        public int Length
-        {
-            get
-            {
-                return len;
-            }
-        }
+        public bool Error { get; private set; }
 
         public int this[int index]
         {
@@ -34,12 +20,12 @@ namespace BasicLearnCSharp
             {
                 if (Ok(index))
                 {
-                    ErrFlag = false;
+                    Error = false;
                     return a[index];
                 }
                 else
                 {
-                    ErrFlag = true;
+                    Error = true;
                     return 0;
                 }
             }
@@ -48,11 +34,11 @@ namespace BasicLearnCSharp
                 if (Ok(index))
                 {
                     a[index] = value;
-                    ErrFlag = false;
+                    Error = false;
                 }
                 else
                 {
-                    ErrFlag = true;
+                    Error = true;
                 }
             }
         }
@@ -65,12 +51,12 @@ namespace BasicLearnCSharp
 
                 if (Ok(index))
                 {
-                    ErrFlag = false;
+                    Error = false;
                     return a[index];
                 }
                 else
                 {
-                    ErrFlag = true;
+                    Error = true;
                     return 0;
                 }
             }
@@ -81,10 +67,10 @@ namespace BasicLearnCSharp
 
                 if (Ok(index))
                 {
-                    ErrFlag = false;
+                    Error = false;
                     a[index] = value;
                 }
-                else ErrFlag = true;
+                else Error = true;
             }
         }
 
