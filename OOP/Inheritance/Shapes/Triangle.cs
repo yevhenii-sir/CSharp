@@ -4,7 +4,14 @@ namespace BasicLearnCSharp
 {
     public class Triangle : TwoDShape
     {
-        public string Style;
+        private string Style;
+
+        public Triangle(string s, double w, double h)
+        {
+            Width = w;
+            Height = h;
+            Style = s;
+        }
 
         public double Area()
         {
