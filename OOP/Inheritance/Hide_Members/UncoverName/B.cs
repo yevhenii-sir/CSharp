@@ -12,9 +12,9 @@ namespace CSharpLearn
             i = b;
         }
 
-        public void Show()
+        public new void Show()
         {
-            Console.WriteLine("Член i в базовом классе: " + base.i);
+            base.Show();
             Console.WriteLine("Член i в производном классе: " + i);
         }
     }
