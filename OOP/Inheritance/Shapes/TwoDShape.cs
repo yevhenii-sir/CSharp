@@ -7,6 +7,22 @@ namespace BasicLearnCSharp
         private double pri_width;
         private double pri_height;
 
+        public TwoDShape()
+        {
+            Width = Height = 0.0;
+        }
+
+        public TwoDShape(double x)
+        {
+            Width = Height = x;
+        }
+        
+        public TwoDShape(double w, double h)
+        {
+            Width = w;
+            Height = h;
+        }
+        
         public double Width
         {
             get { return pri_width; }

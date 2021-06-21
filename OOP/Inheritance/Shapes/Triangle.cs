@@ -6,10 +6,18 @@ namespace BasicLearnCSharp
     {
         private string Style;
 
-        public Triangle(string s, double w, double h)
+        public Triangle()
         {
-            Width = w;
-            Height = h;
+            Style = "null";
+        }
+
+        public Triangle(double x) : base(x)
+        {
+            Style = "равнобедренный";
+        }
+        
+        public Triangle(string s, double w, double h) : base(w, h)
+        {
             Style = s;
         }
 
