@@ -6,13 +6,12 @@ namespace BasicLearnCSharp
     {
         static void Main(string[] args)
         {
-            ColorTriangle t1 = new ColorTriangle("синий", "прямоугольный", 8.0, 12.0);
-            ColorTriangle t2 = new ColorTriangle("красный", "равнобедренный", 2.0, 2.0);
+            Triangle t1 = new Triangle("прямоугольный", 8.0, 12.0);
+            Triangle t2 = new Triangle(t1);
             
             Console.WriteLine("Сведения об объекте t1: ");
             t1.ShowStyle();
             t1.ShowDim();
-            t1.ShowColor();
             Console.WriteLine("Площадь равна " + t1.Area());
             
             Console.WriteLine();
@@ -20,7 +19,6 @@ namespace BasicLearnCSharp
             Console.WriteLine("Сведения об объекте t2: ");
             t2.ShowStyle();
             t2.ShowDim();
-            t2.ShowColor();
             Console.WriteLine("Площадь равна " + t2.Area());
         }
     }

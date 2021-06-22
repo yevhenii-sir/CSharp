@@ -21,6 +21,11 @@ namespace BasicLearnCSharp
             Style = s;
         }
 
+        public Triangle(Triangle ob) : base(ob)
+        {
+            Style = ob.Style;
+        }
+
         public double Area()
         {
             return Width * Height / 2;
