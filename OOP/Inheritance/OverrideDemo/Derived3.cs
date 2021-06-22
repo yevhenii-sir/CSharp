@@ -1,6 +1,6 @@
 namespace CSharpLearn
 {
-    public class Derived2 : Derived1
+    public class Derived3 : Derived2
     {
         //Who() не переопределяеться
     }
