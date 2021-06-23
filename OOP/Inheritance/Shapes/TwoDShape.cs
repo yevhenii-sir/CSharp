@@ -2,7 +2,7 @@ using System;
 
 namespace BasicLearnCSharp
 {
-    public class TwoDShape
+    public abstract class TwoDShape
     {
         private double pri_width;
         private double pri_height;
@@ -54,10 +54,6 @@ namespace BasicLearnCSharp
                               Width + " и " + Height);
         }
 
-        public virtual double Area()
-        {
-            Console.WriteLine("Метод Area() должен быть переопределен");
-            return 0.0;
-        }
+        public abstract double Area();
     }
 }
