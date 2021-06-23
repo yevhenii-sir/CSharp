@@ -10,24 +10,31 @@ namespace BasicLearnCSharp
         public TwoDShape()
         {
             Width = Height = 0.0;
+            Name = "null";
+
         }
 
-        public TwoDShape(double x)
+        public TwoDShape(double x, string n)
         {
             Width = Height = x;
+            Name = n;
         }
         
-        public TwoDShape(double w, double h)
+        public TwoDShape(double w, double h, string n)
         {
             Width = w;
             Height = h;
+            Name = n;
         }
 
         public TwoDShape(TwoDShape ob)
         {
             Width = ob.Width;
             Height = ob.Height;
+            Name = ob.Name;
         }
+        
+        public string Name { get; set; }
         
         public double Width
         {
@@ -45,6 +52,12 @@ namespace BasicLearnCSharp
         {
             Console.WriteLine("Ширина и высота равны " + 
                               Width + " и " + Height);
+        }
+
+        public virtual double Area()
+        {
+            Console.WriteLine("Метод Area() должен быть переопределен");
+            return 0.0;
         }
     }
 }

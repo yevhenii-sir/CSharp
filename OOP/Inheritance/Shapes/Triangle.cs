@@ -11,12 +11,12 @@ namespace BasicLearnCSharp
             Style = "null";
         }
 
-        public Triangle(double x) : base(x)
+        public Triangle(double x) : base(x, "треугольник")
         {
             Style = "равнобедренный";
         }
         
-        public Triangle(string s, double w, double h) : base(w, h)
+        public Triangle(string s, double w, double h) : base(w, h, "треугольник")
         {
             Style = s;
         }
@@ -26,7 +26,7 @@ namespace BasicLearnCSharp
             Style = ob.Style;
         }
 
-        public double Area()
+        public override double Area()
         {
             return Width * Height / 2;
         }
