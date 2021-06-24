@@ -16,7 +16,7 @@ namespace Exercise
             base(firstName, lastName, group, marks)
         {
             ScientificWork = sciW;
-            AverageMark = (ComputationAverageMark(marks) + ScientificWork) / 2;
+            AverageMark = (AverageMark + ScientificWork) / 2;
         }
         public override int GetScholarhip()
         {
