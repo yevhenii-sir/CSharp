@@ -4,7 +4,6 @@ namespace LearnCSharpInterface
     {
         private int start;
         private int val;
-        private int prev;
 
         public ByTows()
         {
@@ -27,11 +26,6 @@ namespace LearnCSharpInterface
         {
             start = x;
             val = start;
-        }
-
-        public int GetPrevious()
-        {
-            return prev;
         }
     }
 }

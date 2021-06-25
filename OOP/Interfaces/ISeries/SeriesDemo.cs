@@ -6,25 +6,17 @@ namespace LearnCSharpInterface
     {
         static void Main(string[] args)
         {
-            ByTows ob = new ByTows();
+            ByTows twoOb = new ByTows();
+            Primes primeOb = new Primes();
+            ISeries ob;
 
             for (int i = 0; i < 5; i++)
             {
-                Console.WriteLine("Следующее число равно " + ob.GetNext());
-            }
-            
-            Console.WriteLine("\nСбросить");
-            ob.Reset();
-            for (int i = 0; i < 5; i++)
-            {
-                Console.WriteLine("Следующее число равно " + ob.GetNext());
-            }
-            
-            Console.WriteLine("\nНачать с числа 100");
-            ob.SetStart(100);
-            for (int i = 0; i < 5; i++)
-            {
-                Console.WriteLine("Следующее число равно " + ob.GetNext());
+                ob = twoOb;
+                Console.WriteLine("Следующие четное число равно " + ob.GetNext());
+
+                ob = primeOb;
+                Console.WriteLine("Следующие простое число равно " + ob.GetNext());
             }
         }
     }
