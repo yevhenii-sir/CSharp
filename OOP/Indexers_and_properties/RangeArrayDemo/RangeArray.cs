@@ -1,6 +1,7 @@
 using System;
+using LearnCSharpException.Exceptions;
 
-namespace BasicLearnCSharp
+namespace LearnCSharpException
 {
     public class RangeArray
     {
@@ -10,8 +11,6 @@ namespace BasicLearnCSharp
         public int upperBound { get; private set; }
 
         public int Length { get; private set; }
-        
-        public bool Error { get; private set; }
 
         public RangeArray(int low, int hight)
         {
@@ -19,16 +18,14 @@ namespace BasicLearnCSharp
 
             if (hight <= low)
             {
-                Console.WriteLine("Неверные индексы!");
-                hight = 1;
-                low = 0;
+                throw new RangeArrayExceptions("Нижний индекс не меньше верхнего.");
             }
 
             a = new int[hight - low];
             Length = hight - low;
 
             lowerBound = low;
-            upperBound = hight;
+            upperBound = --hight;
         }
 
         public int this[int index]
@@ -37,23 +34,20 @@ namespace BasicLearnCSharp
             {
                 if (Ok(index))
                 {
-                    Error = false;
                     return a[index - lowerBound];
                 }
                 else
                 {
-                    Error = true;
-                    return 0;
+                    throw new RangeArrayExceptions("Ошибка нарушения границ.");
                 }
             }
             set
             {
                 if (Ok(index))
                 {
-                    Error = false;
                     a[index - lowerBound] = value;
                 }
-                else Error = true;
+                else throw new RangeArrayExceptions("Ошибка нарушения границ.");
             }
         }
         
@@ -63,3 +57,4 @@ namespace BasicLearnCSharp
         }
     }
 }
+
