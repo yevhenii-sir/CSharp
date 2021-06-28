@@ -1,4 +1,4 @@
-using System;
+using BasicLearnCSharp.Exceptions;
 
 namespace BasicLearnCSharp
 {
@@ -9,10 +9,7 @@ namespace BasicLearnCSharp
             int m;
 
             if (nums.Length == 0)
-            {
-                Console.WriteLine("Ошибка: Нет аргументов!");
-                return 0;
-            }
+                throw new LuckOfArgumetsParams("Аргументы отсутствуют!");
 
             m = nums[0];
             for (int i = 1; i < nums.Length; i++)

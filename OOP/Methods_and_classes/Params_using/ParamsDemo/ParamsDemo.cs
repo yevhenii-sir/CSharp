@@ -1,8 +1,9 @@
 using System;
+using BasicLearnCSharp.Exceptions;
 
 namespace BasicLearnCSharp
 {
-    static class ParamsDemo
+    static class ConveyorDemo
     {
         static void Main(string[] args)
         {
@@ -10,6 +11,16 @@ namespace BasicLearnCSharp
 
             int min;
             int a = 10, b = 20;
+
+            try
+            {
+                min = ob.MinVal();
+                Console.WriteLine("Наименьшее значение равно " + min);
+            }
+            catch (LuckOfArgumetsParams e)
+            {
+                Console.WriteLine(e);
+            }
 
             min = ob.MinVal(a, b);
             Console.WriteLine("Наименьшее значение равно " + min);
@@ -26,3 +37,13 @@ namespace BasicLearnCSharp
         }
     }
 }
+
+/*
+
+Аргументы отсутствуют!
+Наименьшее значение равно 10
+Наименьшее значение равно -1
+Наименьшее значение равно 3
+Наименьшее значение равно 8
+
+*/
