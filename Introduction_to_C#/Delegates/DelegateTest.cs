@@ -1,5 +1,4 @@
 using System;
-using System.Net.Mime;
 
 namespace LearnCSharp
 {
@@ -43,19 +42,22 @@ namespace LearnCSharp
         
         static void Main(string[] args)
         {
-            StrMod strOp = new StrMod(ReplaceSpace);
+            //StrMod strOp = new StrMod(ReplaceSpace); 
+            StrMod strOp = RemoveSpace; //group transformation
             string str;
 
             str = strOp("Это простой тест.");
             Console.WriteLine("Результирущая строка: " + str);
             Console.WriteLine();
             
-            strOp = new StrMod(RemoveSpace);
+            //strOp = new StrMod(RemoveSpace);
+            strOp = RemoveSpace; //group transformation
             str = strOp("Это простой тест.");
             Console.WriteLine("Результирущая строка: " + str);
             Console.WriteLine();
             
-            strOp = new StrMod(Reverce);
+            //strOp = new StrMod(Reverce);
+            strOp = Reverce; //group transformation
             str = strOp("Это простой тест.");
             Console.WriteLine("Результирущая строка: " + str);
         }
