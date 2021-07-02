@@ -1,0 +1,34 @@
+using System;
+
+namespace LearnCSharp
+{
+    delegate void MyEventHandler();
+
+    class MyEvent
+    {
+        public event MyEventHandler SomeEvent;
+
+        public void OnSomeEvent()
+        {
+            if (SomeEvent != null)
+                SomeEvent();
+        }
+    }
+
+    static class EventDemo
+    {
+        private static void Handler()
+        {
+            Console.WriteLine("Произошло событие");
+        }
+
+        static void Main(string[] args)
+        {
+            MyEvent evt = new MyEvent();
+
+            evt.SomeEvent += Handler;
+
+            evt.OnSomeEvent();
+        }
+    }
+}
