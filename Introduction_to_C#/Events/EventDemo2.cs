@@ -47,12 +47,14 @@ namespace LearnCSharp
             evt.SomeEvent += Handler;
             evt.SomeEvent += xOb.XHandler;
             evt.SomeEvent += yOb.YHandler;
-            evt.SomeEvent += () => Console.WriteLine("Событие получено из лямбда-выражения");
+            MyEventHandler lambda = () => Console.WriteLine("Событие получено из лямбда-выражения");
+            evt.SomeEvent += lambda;
 
             evt.OnSomeEvent();
 
             Console.WriteLine();
             evt.SomeEvent -= xOb.XHandler;
+            evt.SomeEvent -= lambda;
             evt.OnSomeEvent();
         }
     }
