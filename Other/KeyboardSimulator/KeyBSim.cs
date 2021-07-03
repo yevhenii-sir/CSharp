@@ -1,6 +1,5 @@
 using System;
 using System.Diagnostics;
-using System.IO;
 
 namespace KeyboardSimulator
 {
@@ -20,14 +19,21 @@ namespace KeyboardSimulator
             
             Console.WriteLine("Введи текст: ");
             int numbOfEnteredChars;
+
+            Stopwatch spentTime = new Stopwatch();
             do
             {
                 numbOfEnteredChars = arg.InputConsoleTextLength;
                 ConsoleKeyInfo key = Console.ReadKey(true);
+                spentTime.Start();
                 arg.Set(key, text, numbOfEnteredChars);
                 keyboardEvent.PressButton(arg);
+                
             } while (numbOfEnteredChars < fullLength - 1);
-
+            
+            spentTime.Stop();
+            Console.WriteLine($"\n\nПотрачено времени: {spentTime.Elapsed.TotalSeconds:#.##} секунд." +
+                              $"\nСкорость: {(fullLength * 60) / spentTime.Elapsed.TotalSeconds:#.##} знаков за минуту.");
         }
     }
 }
