@@ -34,6 +34,7 @@ namespace KeyboardSimulator
             spentTime.Stop();
             Console.WriteLine($"\n\nПотрачено времени: {spentTime.Elapsed.TotalSeconds:#.##} секунд." +
                               $"\nСкорость: {(fullLength * 60) / spentTime.Elapsed.TotalSeconds:#.##} знаков за минуту.");
+            Console.WriteLine(arg.Mistakes + " - ошибок.");
         }
     }
 }

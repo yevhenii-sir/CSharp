@@ -7,6 +7,7 @@ namespace KeyboardSimulator
         public ConsoleKeyInfo Ch;
         public string Text;
         public int InputConsoleTextLength;
+        public int Mistakes;
 
         public void Set(ConsoleKeyInfo ch, string text, int inputConsoleTextLength)
         {
