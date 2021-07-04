@@ -8,25 +8,27 @@ namespace Exercise
         {
             if (args.Message[0] == '!')
             {
-                switch (args.Message)
+                BotState statusBot; 
+                Enum.TryParse(args.Message.Remove(0,1),out statusBot); // delete symbol '!'
+                switch (statusBot)
                 {
-                    case "!Start" : 
+                    case BotState.Start : 
                         Console.WriteLine("Бот запущен.");
                         break;
-                    case "!Clear" :
+                    case BotState.Clear :
                         Console.Clear();
                         break;
-                    case "!Help" :
+                    case BotState.Help :
                         Console.WriteLine("Существуют команды: \n" +
                                           "!Start - вывод сообщения про запуск бота;\n" +
                                           "!Clear - очистка экрана;\n" +
                                           "!Help - помощь;\n" +
                                           "!Exit - выход из преложения.");
                         break;
-                    case "!Exit" : 
+                    case BotState.Exit : 
                         Console.WriteLine("Выход из преложения.");
                         break;
-                    default:
+                    case BotState.CommandNotFound:
                         Console.WriteLine("Команды не найдено!");
                         break;
                 }
