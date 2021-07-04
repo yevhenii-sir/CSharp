@@ -4,6 +4,6 @@ namespace Exercise
 {
     public class MyMessArgs : EventArgs
     {
-        public string Message;
+        public string Message { get; set; }
     }
 }
