@@ -4,10 +4,10 @@ namespace KeyboardSimulator
 {
     public class MyEventArgs : EventArgs
     {
-        public ConsoleKeyInfo Ch;
-        public string Text;
-        public int InputConsoleTextLength;
-        public int Mistakes;
+        public ConsoleKeyInfo Ch { get; set; }
+        public string Text { get; set; }
+        public int InputConsoleTextLength { get; set; }
+        public int Mistakes { get; set; }
 
         public void Set(ConsoleKeyInfo ch, string text, int inputConsoleTextLength)
         {
