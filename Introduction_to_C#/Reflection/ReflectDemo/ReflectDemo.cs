@@ -16,7 +16,8 @@ namespace LearnCSharp
             
             Console.WriteLine("Поддерживаемые методы: ");
 
-            MethodInfo[] mi = t.GetMethods();
+            MethodInfo[] mi = t.GetMethods(BindingFlags.DeclaredOnly | 
+                                           BindingFlags.Instance | BindingFlags.Public);
 
             foreach (MethodInfo m in mi)
             {
