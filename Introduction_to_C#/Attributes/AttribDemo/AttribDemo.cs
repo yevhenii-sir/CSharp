@@ -23,6 +23,8 @@ namespace LearnCSharp
             
             Console.Write("Дополнение: ");
             Console.WriteLine(ra.Supplement);
+            
+            Console.WriteLine("Приоритет: " + ra.Priotity);
         }
     }
 }
@@ -32,5 +34,6 @@ namespace LearnCSharp
 Атрибуты в классе UseAttrib: RemarkAttribute
 Примечание: В этом классе используеться атрибут.
 Дополнение: Это дополнительная информация.
+Приоритет: 10
 
 */

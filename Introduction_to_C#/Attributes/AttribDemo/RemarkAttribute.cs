@@ -11,6 +11,7 @@ public class RemarkAttribute : Attribute
     {
         pri_remark = comment;
         Supplement = "Отсутствует";
+        Priotity = 1;
     }
 
     public string Remark
@@ -18,5 +19,5 @@ public class RemarkAttribute : Attribute
         get { return pri_remark; }
     }
 
-    //или создать свойство private string Remark {get; private set; }
+    public int Priotity { get; set; }
 }
