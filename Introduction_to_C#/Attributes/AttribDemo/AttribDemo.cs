@@ -14,12 +14,15 @@ namespace LearnCSharp
             {
                 Console.WriteLine(o);
             }
-            Console.Write("Примечание: ");
 
             Type tRemAtt = typeof(RemarkAttribute);
             RemarkAttribute ra = (RemarkAttribute) Attribute.GetCustomAttribute(t, tRemAtt);
             
+            Console.Write("Примечание: ");
             Console.WriteLine(ra.Remark);
+            
+            Console.Write("Дополнение: ");
+            Console.WriteLine(ra.Supplement);
         }
     }
 }
@@ -28,5 +31,6 @@ namespace LearnCSharp
 
 Атрибуты в классе UseAttrib: RemarkAttribute
 Примечание: В этом классе используеться атрибут.
+Дополнение: Это дополнительная информация.
 
 */
