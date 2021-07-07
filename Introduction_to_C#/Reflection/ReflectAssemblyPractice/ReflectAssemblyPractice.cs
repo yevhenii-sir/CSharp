@@ -19,16 +19,16 @@ namespace LearnCSharp
                 if (i + 1 < allTypes.Length) Console.Write(", ");
             }
             Console.WriteLine(".");
-            
-            Console.WriteLine("\nВывести конструкторы и методы каждого класса сборки: ");
-            
+
+            Console.WriteLine("\nВывести конструкторы и методы (+ коментарии атребутa VersionAttribute) каждого класса сборки: ");
+
             foreach (var allType in allTypes)
             {
                 Console.WriteLine("-------------------------------");
                 Console.WriteLine("Класс " + allType.Name);
-                
+
                 ConstructorInfo[] ci = allType.GetConstructors();
-                
+
                 if (ci.Length == 0) Console.WriteLine("Присутствует только конструктор по умолчанию.");
                 else
                 {
@@ -50,11 +50,11 @@ namespace LearnCSharp
                     }
                 }
                 Console.WriteLine();
-                
+
                 Console.WriteLine("Методы: ");
 
                 MethodInfo[] mi = allType.GetMethods();
-                
+
                 foreach (var m in mi)
                 {
                     Console.Write(" " + m.Name + " (");
@@ -67,20 +67,73 @@ namespace LearnCSharp
                         if (i + 1 < pi.Length) Console.Write(", ");
                     }
 
-                    Console.WriteLine(");");
+                    Console.Write(");");
+
+                    object[] attribMethods = m.GetCustomAttributes(false);
+
+                    foreach (var o in attribMethods)
+                    {
+                        if (o.ToString() == "VersionAttribute")
+                        {
+                            object version = o.GetType().GetProperty("Version")?.GetValue(o);
+                            object comment = o.GetType().GetProperty("Comment")?.GetValue(o);
+                            
+                            Console.Write($"  - метод; версия: {version:#.0#}; ");
+                            Console.WriteLine($"коментарий: {comment};");
+                        }
+                    }
+                    Console.WriteLine();
+                }
+
+                object[] attribClass = allType.GetCustomAttributes(false);
+
+                foreach (var o in attribClass)
+                {
+                    if (o.ToString() == "VersionAttribute")
+                    {
+                        /*Type f = o.GetType(); //как я пришел к 'o.GetType().GetProperty(name)?.GetValue(o)'
+                        var pi = f.GetProperties();
+                        foreach (var propertyInfo in pi)
+                        {
+                            Console.WriteLine(propertyInfo.Name + propertyInfo.GetValue(o));
+                        }*/
+                        
+                        Console.WriteLine();
+                        object version = o.GetType().GetProperty("Version")?.GetValue(o);
+                        object comment = o.GetType().GetProperty("Comment")?.GetValue(o);
+                        
+                        Console.WriteLine("Примечания: ");
+                        Console.WriteLine($"Версия: {version:#.##}");
+                        Console.WriteLine($"Коментарий: {comment}");
+                    }
                 }
             }
         }
     }
 }
 
-/* Результат выполнения программы: 
+/*
 
-Найдено: CountInst, Factorial, Min, MyClass, NumericFn, Overload, Rect, RefSwap, RevStr, Stack, 
-StaticDemo, XYCoord, ColorTriangle, ConveyorControl, FailSoftArray, FailSoftArray2D, PropAcces, 
-PwrOfTwo, RangeArray, SimpProp, ConveyorDemo, Rectangle, Triangle, TwoDShape, Nybble, ThreeD.
+Найдено: VersionAttribute, CountInst, Factorial, Min, MyClass, NumericFn, Overload, Rect, RefSwap, RevStr, 
+Stack, StaticDemo, XYCoord, ColorTriangle, ConveyorControl, FailSoftArray, FailSoftArray2D, PropAcces, 
+PwrOfTwo, RangeArray, SimpProp, ConveyorDemo, Rectangle, Triangle, TwoDShape, Nybble, ThreeD;
 
-Вывести конструкторы и методы каждого класса сборки: 
+Вывести конструкторы и методы (+ коментарии атребутa VersionAttribute) каждого класса сборки: 
+-------------------------------
+Класс VersionAttribute
+Конструкторы: 
+ VersionAttribute (Double version, String comment);
+
+Методы: 
+ get_Version ();
+ get_Comment ();
+ Equals (Object obj);
+ GetHashCode ();
+ get_TypeId ();
+ Match (Object obj);
+ IsDefaultAttribute ();
+ GetType ();
+ ToString ();
 -------------------------------
 Класс CountInst
 Конструкторы: 
@@ -92,14 +145,20 @@ PwrOfTwo, RangeArray, SimpProp, ConveyorDemo, Rectangle, Triangle, TwoDShape, Ny
  ToString ();
  Equals (Object obj);
  GetHashCode ();
+
+Примечания: 
+Версия: 1,2
+Коментарий: Добавлен деструктор
 -------------------------------
 Класс Factorial
 Конструкторы: 
  Factorial ();
 
 Методы: 
- FactR (Int32 n);
- FactI (Int32 n);
+ FactR (Int32 n);  - метод; версия: 2,0; коментарий: Метод для вычисления факториала рекурсивно;
+
+ FactI (Int32 n);  - метод; версия: 1,0; коментарий: Метод для вычисления факториала итерационно;
+
  GetType ();
  ToString ();
  Equals (Object obj);
@@ -127,6 +186,10 @@ PwrOfTwo, RangeArray, SimpProp, ConveyorDemo, Rectangle, Triangle, TwoDShape, Ny
  ToString ();
  Equals (Object obj);
  GetHashCode ();
+
+Примечания: 
+Версия: 3,1
+Коментарий: Добавлен вывод а и б
 -------------------------------
 Класс NumericFn
 Присутствует только конструктор по умолчанию.
@@ -450,5 +513,6 @@ PwrOfTwo, RangeArray, SimpProp, ConveyorDemo, Rectangle, Triangle, TwoDShape, Ny
  ToString ();
  Equals (Object obj);
  GetHashCode ();
-
-*/
+-------------------------------
+ 
+ */
