@@ -26,7 +26,11 @@ namespace LearnCSharpLINQ
             var inStockList = from item in items
                 join entry in statusList
                     on item.ItemNumber equals entry.ItemNumber
-                select new Temp(item.Name, entry.InStock);
+                select new
+                {
+                    Name = item.Name,
+                    InStock = entry.InStock
+                }; // or new{item.Name, entry.InStock}
 
             Console.WriteLine("Товар\t Наличие\n");
             foreach (var temp in inStockList)
