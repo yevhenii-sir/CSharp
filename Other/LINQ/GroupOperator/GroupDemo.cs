@@ -13,12 +13,11 @@ namespace LearnCSharpLINQ
                 "hsNameD.com", "hsNameE.org", "hsNameF.org",
                 "hsNameG.tv", "hsNameH.net", "hsNameI.tv"
             };
+            
+            var webAdrs = websites.Where(w => w.LastIndexOf('.') != -1)
+                .GroupBy(x => x.Substring(x.LastIndexOf('.')));
 
-            var webAddrs = from addr in websites
-                where addr.LastIndexOf('.') != -1
-                group addr by addr.Substring(addr.LastIndexOf('.'));
-
-            foreach (var sites in webAddrs)
+            foreach (var sites in webAdrs)
             {
                 Console.WriteLine("Веб-сайты, сгрупированные по имени домена " + sites.Key);
 
@@ -50,4 +49,3 @@ namespace LearnCSharpLINQ
  hsNameI.tv
 
 */
-
