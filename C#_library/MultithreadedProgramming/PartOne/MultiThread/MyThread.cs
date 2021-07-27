@@ -6,26 +6,28 @@ namespace LearnCSharpMultiThrProgramming
     public class MyThread
     {
         public int Count;
-        private string thrdName;
+        public Thread Thrd;
 
         public MyThread(string name)
         {
             Count = 0;
-            thrdName = name;
+            Thrd = new Thread(this.Run);
+            Thrd.Name = name;
+            Thrd.Start();
         }
 
         public void Run()
         {
-            Console.WriteLine(thrdName + " начат.");
+            Console.WriteLine(Thrd.Name + " начат.");
 
             do
             {
                 Thread.Sleep(500);
-                Console.WriteLine($"В потоке " + thrdName + ", Count = " + Count);
+                Console.WriteLine($"В потоке " + Thrd.Name + ", Count = " + Count);
                 Count++;
             } while (Count < 10);
             
-            Console.WriteLine(thrdName + " завершен.");
+            Console.WriteLine(Thrd.Name + " завершен.");
         }
     }
 }

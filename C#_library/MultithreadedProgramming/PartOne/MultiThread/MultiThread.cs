@@ -10,10 +10,7 @@ namespace LearnCSharpMultiThrProgramming
             Console.WriteLine("Основной поток начат.");
 
             MyThread mt = new MyThread("Потомок #1");
-
-            Thread newThread = new Thread(mt.Run);
             
-            newThread.Start();
             do
             {
                 Console.Write(".");
