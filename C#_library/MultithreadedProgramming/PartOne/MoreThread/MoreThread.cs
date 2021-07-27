@@ -17,9 +17,9 @@ namespace LearnCSharpMultiThrProgramming
             {
                 Console.Write(".");
                 Thread.Sleep(100);
-            } while (mt1.Count < 10 ||
-                     mt2.Count < 10 || 
-                     mt3.Count < 10);
+            } while (mt1.Thrd.IsAlive &&
+                     mt2.Thrd.IsAlive &&
+                     mt3.Thrd.IsAlive);
             
             Console.WriteLine("Основной поток завешен.");
         }
