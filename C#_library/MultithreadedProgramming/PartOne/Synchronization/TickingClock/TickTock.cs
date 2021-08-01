@@ -1,42 +1,37 @@
 using System;
+using System.Runtime.CompilerServices;
 using System.Threading;
 
 namespace LearnCSharpMultiThrProgramming
 {
     public class TickTock
     {
-        private object lockOn = new object();
-
+        [MethodImplAttribute(MethodImplOptions.Synchronized)]
         public void Tick(bool running)
         {
-            lock (lockOn)
+            if (!running)
             {
-                if (!running)
-                {
-                    Monitor.Pulse(lockOn);
-                    return;
-                }
-                
-                Console.Write("тик ");
-                Monitor.Pulse(lockOn);
-                Monitor.Wait(lockOn);
+                Monitor.Pulse(this);
+                return;
             }
+
+            Console.Write("тик ");
+            Monitor.Pulse(this);
+            Monitor.Wait(this);
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void Tock(bool running)
         {
-            lock (lockOn)
+            if (!running)
             {
-                if (!running)
-                {
-                    Monitor.Pulse(lockOn);
-                    return;
-                }
-                
-                Console.WriteLine("так");
-                Monitor.Pulse(lockOn);
-                Monitor.Wait(lockOn);
+                Monitor.Pulse(this);
+                return;
             }
+
+            Console.WriteLine("так");
+            Monitor.Pulse(this);
+            Monitor.Wait(this);
         }
     }
 }
