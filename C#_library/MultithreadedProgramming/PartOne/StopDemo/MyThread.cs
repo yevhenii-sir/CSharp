@@ -15,19 +15,27 @@ namespace LearnCSharpFramework
 
         void Run()
         {
-            Console.WriteLine(Thrd.Name + " started.");
-
-            for (int i = 1; i <= 1000; i++)
+            try
             {
-                Console.Write(i + " ");
-                if (i % 10 == 0)
-                {
-                    Console.WriteLine();
-                    Thread.Sleep(250);
-                }
-            }
+                Console.WriteLine(Thrd.Name + " started.");
 
-            Console.WriteLine(Thrd.Name + " fin.");
+                for (int i = 1; i <= 1000; i++)
+                {
+                    Console.Write(i + " ");
+                    if (i % 10 == 0)
+                    {
+                        Console.WriteLine();
+                        Thread.Sleep(250);
+                    }
+                }
+
+                Console.WriteLine(Thrd.Name + " fin.");
+            }
+            catch (ThreadAbortException exc)
+            {
+                Console.WriteLine("Поток прерван, код завершения " + exc.ExceptionState);
+            }
+            
         }
     }
 }
