@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Threading;
 
 namespace LearnCSharpMultiThrProgramming
 {
@@ -27,9 +28,10 @@ namespace LearnCSharpMultiThrProgramming
         public void Write(object text)
         {
             WriteToFilePractice.Mtx.WaitOne();
-            
+
             _streamWriter.WriteLine(text.ToString());
-            
+            Thread.Sleep(500); //для проверки
+
             WriteToFilePractice.Mtx.ReleaseMutex();
         }
 
