@@ -6,34 +6,22 @@ namespace LearnCSharpMultiThrProgramming
 {
     static class DemoTask
     {
-        static void MyTask()
-        {
-            Console.WriteLine("MyTask() запущен");
-
-            for (int count = 0; count < 10; count++)
-            {
-                Thread.Sleep(500);
-                Console.WriteLine("В методе MyTask(), подсчет равен " + count);
-            }
-            
-            Console.WriteLine("MyTask завершен");
-        } 
-        
         static void Main(string[] args)
         {
-           Console.WriteLine("Основной поток запущен.");
+            Console.WriteLine("Основной поток запущен.");
+            MyClass mc = new MyClass();
 
-           Task tsk = new Task(MyTask);
-           
-           tsk.Start();
+            Task tsk = new Task(mc.MyTask);
 
-           for (int i = 0; i < 60; i++)
-           {
-               Console.Write(".");
-               Thread.Sleep(100);
-           }
-           
-           Console.WriteLine("Основной поток завершен.");
+            tsk.Start();
+
+            for (int i = 0; i < 60; i++)
+            {
+                Console.Write(".");
+                Thread.Sleep(100);
+            }
+
+            Console.WriteLine("Основной поток завершен.");
         }
     }
 }
@@ -56,5 +44,3 @@ MyTask завершен
 ..........Основной поток завершен.
 
  */
-
-
