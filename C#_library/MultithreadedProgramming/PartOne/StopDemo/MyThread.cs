@@ -15,11 +15,13 @@ namespace LearnCSharpFramework
 
         void Run()
         {
-            try
-            {
-                Console.WriteLine(Thrd.Name + " started.");
 
-                for (int i = 1; i <= 1000; i++)
+            Console.WriteLine(Thrd.Name + " started.");
+
+            for (int i = 1; i <= 1000; i++)
+
+            {
+                try
                 {
                     Console.Write(i + " ");
                     if (i % 10 == 0)
@@ -28,14 +30,20 @@ namespace LearnCSharpFramework
                         Thread.Sleep(250);
                     }
                 }
+                catch (ThreadAbortException exc)
+                {
+                    if ((int)exc.ExceptionState == 0)
+                    {
+                        Console.WriteLine("Прерывание потока отменено! Код завершения " + exc.ExceptionState);
+                        Thread.ResetAbort();
+                    }
+                    Console.WriteLine("Поток прерван, код завершения " + exc.ExceptionState);
+                }
 
-                Console.WriteLine(Thrd.Name + " fin.");
+                
             }
-            catch (ThreadAbortException exc)
-            {
-                Console.WriteLine("Поток прерван, код завершения " + exc.ExceptionState);
-            }
-            
+            Console.WriteLine(Thrd.Name + " fin.");
+
         }
     }
 }
