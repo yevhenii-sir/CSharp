@@ -32,8 +32,7 @@ namespace LearnCSharpMultiThrProgramming
             Console.WriteLine("Индетификатор задачи tsk: " + tsk.Id);
             Console.WriteLine("Индетификатор задачи tsk2: " + tsk2.Id);
 
-            tsk.Wait();
-            tsk2.Wait();
+            Task.WaitAll(tsk, tsk2);
             
             Console.WriteLine("Основной поток завершен.");
         }
