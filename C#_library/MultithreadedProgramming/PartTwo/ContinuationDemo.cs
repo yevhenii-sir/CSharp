@@ -19,25 +19,23 @@ namespace LearnCSharpMultiThrProgramming
             Console.WriteLine("MyTask() завершен");
         }
 
-        static void ContTask(Task t)
-        {
-            Console.WriteLine("Продолжение запущено");
-
-            for (int count = 0; count < 5; count++)
-            {
-                Thread.Sleep(500);
-                Console.WriteLine("В продолжении подсчет равен " + count);
-            }
-            
-            Console.WriteLine("Продолжение завершено");
-        }
-        
         static void Main(string[] args)
         {
             Console.WriteLine("Основной поток запущен.");
 
             Task tsk = new Task(MyTask);
-            Task tskCont = tsk.ContinueWith(ContTask);
+            Task tskCont = tsk.ContinueWith(task =>
+            {
+                Console.WriteLine("Продолжение запущено");
+
+                for (int count = 0; count < 5; count++)
+                {
+                    Thread.Sleep(500);
+                    Console.WriteLine("В продолжении подсчет равен " + count);
+                }
+            
+                Console.WriteLine("Продолжение завершено");
+            });
             
             tsk.Start();
 
