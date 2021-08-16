@@ -1,5 +1,5 @@
 using System;
-using System.Collections.Generic;
+using System.Collections;
 
 namespace LearnCSharpCollections
 {
@@ -7,7 +7,8 @@ namespace LearnCSharpCollections
     {
         static void Main(string[] args)
         {
-            List<Inventory> inv = new List<Inventory>();
+            CompInv comp = new CompInv();
+            ArrayList inv = new ArrayList();
 
             inv.Add(new Inventory("Кусачки", 5.95, 3));
             inv.Add(new Inventory("Отвертки", 8.29, 2));
@@ -19,7 +20,7 @@ namespace LearnCSharpCollections
                 Console.WriteLine(" " + i);
             Console.WriteLine();
             
-            inv.Sort();
+            inv.Sort(comp);
             Console.WriteLine("Перечень товарных запасов: ");
             foreach (var i in inv)
                 Console.WriteLine(" " + i);
