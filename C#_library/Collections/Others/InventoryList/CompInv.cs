@@ -1,16 +1,13 @@
 using System;
-using System.Collections;
+using System.Collections.Generic;
 
 namespace LearnCSharpCollections
 {
-    public class CompInv : IComparer
+    public class CompInv<T> : IComparer<T> where T : Inventory
     {
-        public int Compare(object x, object y)
+        public int Compare(T x, T y)
         {
-            Inventory a = (Inventory)x;
-            Inventory b = (Inventory)y;
-
-            return string.Compare(a.name, b.name, StringComparison.Ordinal);
+            return string.Compare(x.name, y.name, StringComparison.Ordinal);
         }
     }
 }
