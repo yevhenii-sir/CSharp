@@ -2,7 +2,7 @@ using System;
 
 namespace LearnCSharpCollections
 {
-    public class Inventory: IComparable
+    public class Inventory: IComparable<Inventory>
     {
         private string name;
         private double cost;
@@ -15,10 +15,9 @@ namespace LearnCSharpCollections
             onhand = h;
         }
 
-        public int CompareTo(object obj)
+        public int CompareTo(Inventory other)
         {
-            Inventory b = (Inventory)obj;
-            return name.CompareTo(b.name);
+            return name.CompareTo(other.name);
         }
 
         public override string ToString()
