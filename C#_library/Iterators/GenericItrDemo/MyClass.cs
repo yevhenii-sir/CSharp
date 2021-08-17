@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 
 namespace LearnCSharpCollections
@@ -10,6 +9,12 @@ namespace LearnCSharpCollections
         public MyClass(T[] array)
         {
             _array = array;
+        }
+
+        public IEnumerable<T> MyItr(int startIndex, int count)
+        {
+            for (int i = startIndex; i < startIndex + count; i++)
+                yield return _array[i];
         }
 
         public IEnumerator<T> GetEnumerator()
