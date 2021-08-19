@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Program</name>
+    </assembly>
+    <members>
+        <member name="M:LearnCSharpWeb.Test.Main">
+            <summary>
+            Выполнение программы начинаеться с метода Main().
+            </summary>
+        </member>
+        <member name="M:LearnCSharpWeb.Test.Summation(System.Int32)">
+            <summary>
+            Метод Summation() возвращает сумму его аргументов.
+            <param name="val">
+            Суммируемое значение передается в качестве параметра val.
+            </param>
+            <see cref="T:System.Int32"> </see>
+            <returns>Сумма возвращается в виде значения типа int.</returns>
+            </summary>
+        </member>
+    </members>
+</doc>
