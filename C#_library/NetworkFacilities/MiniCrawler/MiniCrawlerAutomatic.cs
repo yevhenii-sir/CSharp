@@ -29,53 +29,43 @@ namespace LearnCSharpWeb
 
         static void Main(string[] args) //Не понятно работает ли правильно
         {
-            string link = null;
-            string str, answer;
-            int tabCount = 0;
+            string link;
+            int tabCount = 0, currentLocation;
 
-            Stack<(string pageText, int curloc, string link)> mStack = new Stack<(string pageText, int curloc, string link)>();
-            Dictionary<string, int> urlIdent = new Dictionary<string, int>();
-
-            int curloc;
+            Stack<(string link, string pageData, int curloc)> pagesStack = new ();
+            Dictionary<string, int?> links = new Dictionary<string, int?>();
 
             Console.Write("Введите URL: ");
-            string uristr = Console.ReadLine();
+            string uriStr = Console.ReadLine();
 
             try
             {
                 do
                 {
-                    Console.WriteLine("Переход по ссылке " + uristr);
+                    Console.WriteLine("Переход по ссылке " + uriStr);
                     WebClient user = new WebClient();
-                    str = user.DownloadString(uristr);
+                    string pageData = user.DownloadString(uriStr);
 
-                    uristr = null;
-
-                    curloc = 0;
+                    uriStr = null;
+                    currentLocation = 0;
+                    
                     do
                     {
-                        link = FindLink(str, ref curloc);
-                        mStack.Push((str, curloc, link));
-                        if (link != null && !urlIdent.ContainsKey(link))
-                        {
-                            urlIdent.Add(link, 1);
-                        }
-                        else
-                        {
-                            link = null;
-                        }
+                        link = FindLink(pageData, ref currentLocation);
+                        pagesStack.Push((link, pageData, currentLocation));
 
-                        if (link != null)
+                        if (link != null && !links.ContainsKey(link))
                         {
+                            links.Add(link, null);
                             Console.WriteLine(new String('\t', tabCount) + "Переход по ссылке: " + link);
-                            uristr = link;
+                            uriStr = link;
                         }
                         else
                         {
                             Console.Write("Больше ссылок не найдено.");
-                            if (mStack.Count > 0)
+                            if (pagesStack.Count > 0)
                             {
-                                (str, curloc, link) = mStack.Pop();
+                                (link, pageData, currentLocation) = pagesStack.Pop();
                                 Console.WriteLine(" Преход назад и поиск дальше на сайте - " + link);
                                 tabCount = 0;
                             }
@@ -84,7 +74,7 @@ namespace LearnCSharpWeb
                         tabCount++;
                         Thread.Sleep(700);
                     } while (link?.Length > 0);
-                } while (uristr != null);
+                } while (uriStr != null);
             }
             catch (WebException exc)
             {
