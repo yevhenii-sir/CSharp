@@ -6,16 +6,17 @@ namespace PracticeSQLite
 {
     static class Program
     {
-        private static string _fileName, _fullLocationToFile;
-        private static SQLiteConnection _connection;
-        
+        private static string _fileName, _fullLocationToFile, _connectionString;
+
         static void Main(string[] args)
         {
-            Console.Write("Полное имя базы даных которою хотите создать: ");
+            //Console.Write("Полное имя базы даных которою хотите создать: ");
+            Console.Write("Имя файла: ");
             _fileName = Console.ReadLine();
             _fullLocationToFile = @"/home/ainerond/LearnSQLite/Databases/" + _fileName;
+            _connectionString = "DataSource = " + _fullLocationToFile + ";";
 
-            if (!File.Exists(_fullLocationToFile))
+            /*if (!File.Exists(_fullLocationToFile))
             {
                 SQLiteConnection.CreateFile(_fullLocationToFile);
             }
@@ -26,21 +27,39 @@ namespace PracticeSQLite
             }
             
             CreateTable();
-            AddData();
+            AddData();*/
             
+            UpdateName(3, "Сергей"); //заменить имя персоны у которой id = 3 
+
             Console.WriteLine("Выход из программы...");
+        }
+
+        private static void UpdateName(int id, string replaceByName)
+        {
+            using (var connection = new SQLiteConnection(_connectionString))
+            {
+                SQLiteCommand command =
+                    new SQLiteCommand("UPDATE Persona SET FirstName = @name WHERE ID == @id", connection);
+                command.Parameters.AddWithValue("@name", replaceByName);
+                command.Parameters.AddWithValue("@id", id);
+                
+                connection.Open();
+                command.ExecuteNonQuery();
+                connection.Close();
+                Console.WriteLine("Успешно заменено!");
+            }
         }
 
         private static void CreateTable()
         {
-            using (_connection = new SQLiteConnection("DataSource = " + _fullLocationToFile + ";"))
+            using (var connection = new SQLiteConnection(_connectionString))
             {
                 string commandStr = "CREATE TABLE Persona (ID INTEGER PRIMARY KEY, FirstName TEXT, LastName TEXT, Telephone TEXT);";
 
-                SQLiteCommand command = new SQLiteCommand(commandStr, _connection);
-                _connection.Open();
+                SQLiteCommand command = new SQLiteCommand(commandStr, connection);
+                connection.Open();
                 command.ExecuteNonQuery(); //выполнение запроса
-                _connection.Close();
+                connection.Close();
             }
         }
 
@@ -48,7 +67,7 @@ namespace PracticeSQLite
         {
             try
             {
-                using (_connection = new SQLiteConnection("DataSource = " + _fullLocationToFile + ";"))
+                using (var connection = new SQLiteConnection(_connectionString))
                 {
                     string commandStr, temp;
                     Console.Write("Для выхода напишите !Exit. \nВведите даные персоны (Имя Фамилия Телефон): ");
@@ -60,14 +79,14 @@ namespace PracticeSQLite
                             commandStr =
                                 "INSERT INTO Persona (FirstName, LastName, Telephone) VALUES (@fName, @lName, @tel)";
 
-                            SQLiteCommand command = new SQLiteCommand(commandStr, _connection);
+                            SQLiteCommand command = new SQLiteCommand(commandStr, connection);
                             command.Parameters.AddWithValue("@fName", personData[0]);
                             command.Parameters.AddWithValue("@lName", personData[1]);
                             command.Parameters.AddWithValue("@tel", personData[2]);
 
-                            _connection.Open();
+                            connection.Open();
                             command.ExecuteNonQuery();
-                            _connection.Close();
+                            connection.Close();
 
                             Console.WriteLine("Данные записано!");
                         }
@@ -90,15 +109,8 @@ namespace PracticeSQLite
 
 /*
 
-Полное имя базы даных которою хотите создать: Database.db
-Для выхода напишите !Exit. 
-Введите даные персоны (Имя Фамилия Телефон): Евгений Сиренко +380457569845
-Данные записано!
-Введите даные персоны (Имя Фамилия Телефон): Ростислав Ляшенко +380645896541
-Данные записано!
-Введите даные персоны (Имя Фамилия Телефон): Андрей Бев +380475321475
-Данные записано!
-Введите даные персоны (Имя Фамилия Телефон): !Exit
+Имя файла: Database.db
+Успешно заменено!
 Выход из программы...
 
  */
