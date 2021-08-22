@@ -46,7 +46,7 @@ namespace PracticeSQLite
                         Console.WriteLine($"{"ID", -3}{"FirstName", -12}{"LastName", -10}Telephone");
                         while (reader.Read())
                         {
-                            var id = reader["ID"];
+                            var id = reader.GetInt32(0);
                             var firstName = reader["FirstName"];
                             var lastName = reader["LastName"];
                             var telephone = reader["Telephone"];
@@ -54,7 +54,12 @@ namespace PracticeSQLite
                             Console.WriteLine($"{id, -3}{firstName, -12}{lastName, -10}{telephone}");
                         }
                     }
+
+                    var count = new SQLiteCommand("SELECT COUNT(*) FROM Persona", connection).ExecuteScalar();
+                    Console.WriteLine("Всего записей: " + count);
                 }
+                
+                connection.Close();
             }
         }
 
@@ -137,6 +142,7 @@ ID FirstName   LastName  Telephone
 1  Евгений     Сиренко   +380457569845
 2  Ростислав   Ляшенко   +380645896541
 3  Сергей      Бев       +380475321475
+Всего записей: 3
 Выход из программы...
 
 */
