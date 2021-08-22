@@ -10,13 +10,12 @@ namespace PracticeSQLite
 
         static void Main(string[] args)
         {
-            //Console.Write("Полное имя базы даных которою хотите создать: ");
-            Console.Write("Имя файла: ");
+            Console.Write("Полное имя базы даных которою хотите создать: ");
             _fileName = Console.ReadLine();
             _fullLocationToFile = @"/home/ainerond/LearnSQLite/Databases/" + _fileName;
             _connectionString = "DataSource = " + _fullLocationToFile + ";";
 
-            /*if (!File.Exists(_fullLocationToFile))
+            if (!File.Exists(_fullLocationToFile))
             {
                 SQLiteConnection.CreateFile(_fullLocationToFile);
             }
@@ -27,91 +26,79 @@ namespace PracticeSQLite
             }
             
             CreateTable();
-            AddData();*/
-            
-            UpdateName(3, "Сергей"); //заменить имя персоны у которой id = 3 
+            AddData();
 
             Console.WriteLine("Выход из программы...");
         }
 
-        private static void UpdateName(int id, string replaceByName)
+        private static int ExecuteNonQueryCommand(this SQLiteCommand command)
         {
-            using (var connection = new SQLiteConnection(_connectionString))
-            {
-                SQLiteCommand command =
-                    new SQLiteCommand("UPDATE Persona SET FirstName = @name WHERE ID == @id", connection);
-                command.Parameters.AddWithValue("@name", replaceByName);
-                command.Parameters.AddWithValue("@id", id);
-                
-                connection.Open();
-                command.ExecuteNonQuery();
-                connection.Close();
-                Console.WriteLine("Успешно заменено!");
-            }
-        }
-
-        private static void CreateTable()
-        {
-            using (var connection = new SQLiteConnection(_connectionString))
-            {
-                string commandStr = "CREATE TABLE Persona (ID INTEGER PRIMARY KEY, FirstName TEXT, LastName TEXT, Telephone TEXT);";
-
-                SQLiteCommand command = new SQLiteCommand(commandStr, connection);
-                connection.Open();
-                command.ExecuteNonQuery(); //выполнение запроса
-                connection.Close();
-            }
-        }
-
-        private static void AddData()
-        {
+            int number = -1;
+            
             try
             {
-                using (var connection = new SQLiteConnection(_connectionString))
-                {
-                    string commandStr, temp;
-                    Console.Write("Для выхода напишите !Exit. \nВведите даные персоны (Имя Фамилия Телефон): ");
-                    while ((temp = Console.ReadLine()) != "!Exit")
-                    {
-                        string[] personData = temp.Split();
-                        if (personData.Length == 3)
-                        {
-                            commandStr =
-                                "INSERT INTO Persona (FirstName, LastName, Telephone) VALUES (@fName, @lName, @tel)";
-
-                            SQLiteCommand command = new SQLiteCommand(commandStr, connection);
-                            command.Parameters.AddWithValue("@fName", personData[0]);
-                            command.Parameters.AddWithValue("@lName", personData[1]);
-                            command.Parameters.AddWithValue("@tel", personData[2]);
-
-                            connection.Open();
-                            command.ExecuteNonQuery();
-                            connection.Close();
-
-                            Console.WriteLine("Данные записано!");
-                        }
-                        else
-                        {
-                            Console.WriteLine("Не правильно введены данные");
-                        }
-
-                        Console.Write("Введите даные персоны (Имя Фамилия Телефон): ");
-                    }
-                }
+                using var connection = new SQLiteConnection(_connectionString);
+                command.Connection = connection;
+                connection.Open();
+                number = command.ExecuteNonQuery();
+                connection.Close();
             }
             catch (SQLiteException exc)
             {
                 Console.WriteLine(exc.Message);
             }
+
+            return number;
+        }
+
+        private static void UpdateName(int id, string replaceByName)
+        {
+            SQLiteCommand command =
+                new SQLiteCommand("UPDATE Persona SET FirstName = @name WHERE ID == @id");
+            command.Parameters.AddWithValue("@name", replaceByName);
+            command.Parameters.AddWithValue("@id", id);
+
+            command.ExecuteNonQueryCommand();
+            Console.WriteLine("Успешно заменено!");
+        }
+
+        private static void CreateTable()
+        {
+            string commandStr =
+                "CREATE TABLE Persona (ID INTEGER PRIMARY KEY, FirstName TEXT, LastName TEXT, Telephone TEXT);";
+
+            SQLiteCommand command = new SQLiteCommand(commandStr);
+            command.ExecuteNonQueryCommand();
+        }
+
+        private static void AddData()
+        {
+            string commandStr, temp;
+            Console.Write("Для выхода напишите !Exit. \nВведите даные персоны (Имя Фамилия Телефон): ");
+            while ((temp = Console.ReadLine()) != "!Exit")
+            {
+                string[] personData = temp.Split();
+                if (personData.Length == 3)
+                {
+                    commandStr =
+                        "INSERT INTO Persona (FirstName, LastName, Telephone) VALUES (@fName, @lName, @tel)";
+
+                    SQLiteCommand command = new SQLiteCommand(commandStr);
+                    command.Parameters.AddWithValue("@fName", personData[0]);
+                    command.Parameters.AddWithValue("@lName", personData[1]);
+                    command.Parameters.AddWithValue("@tel", personData[2]);
+
+                    command.ExecuteNonQueryCommand();
+
+                    Console.WriteLine("Данные записано!");
+                }
+                else
+                {
+                    Console.WriteLine("Не правильно введены данные");
+                }
+
+                Console.Write("Введите даные персоны (Имя Фамилия Телефон): ");
+            }
         }
     }
 }
-
-/*
-
-Имя файла: Database.db
-Успешно заменено!
-Выход из программы...
-
- */
-
