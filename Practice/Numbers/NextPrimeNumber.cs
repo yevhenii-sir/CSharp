@@ -4,29 +4,21 @@ namespace LearnCSharpOther
 {
     static class NextPrimeNumber
     {
-        private static int _i = 2;
-
         static bool IsPrime(int n)
         {
-            if (n == 0 || n == 1)
-                return false;
+            if (n <= 1) return false;
 
-            if (n == _i) return true;
+            for (int i = 2; i <= n / i; i++)
+            {
+                if (n % i == 0) return false;
+            }
 
-            if (n % _i == 0)
-                return false;
-
-            _i++;
-            return IsPrime(n);
+            return true;
         }
 
         static int NextPrime(int n)
         {
-            _i = 2;
-            
-            while (!IsPrime(++n))
-                _i = 2;
-            
+            while (!IsPrime(++n)){};
             return n;
         }
 
@@ -34,8 +26,7 @@ namespace LearnCSharpOther
         {
             Console.Write("Начальное число: ");
             int n = Convert.ToInt32(Console.ReadLine());
-
-            char ch;
+            
             Console.WriteLine("Для поиска следующеего простого числа нажимайте Y, для выхода N.");
             while (Console.ReadKey(true).KeyChar == 'Y')
             {
@@ -60,6 +51,5 @@ Cледующее простое число: 41
 Cледующее простое число: 43
 Cледующее простое число: 47
 Cледующее простое число: 53
-
 
 */
