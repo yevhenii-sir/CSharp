@@ -1,5 +1,3 @@
-//using example "https://upread.ru/art.php?id=84"
-
 using System;
 using System.Net;
 using System.Text;
@@ -27,13 +25,9 @@ namespace ParsTest
 
                 string htmlCode = Encoding.UTF8.GetString(htmlData);
 
-                var pars1 = Regex.Split(htmlCode, "class=\"today-temp\">");
-                var pars2 = Regex.Split(pars1[1], " ");
-
-                var temp = Convert.ToInt32(pars2[0].Substring(0, pars2[0].IndexOf('&')));
-                //int temp = Convert.ToInt32(Regex.Replace(pars2[0], @"[^\d]+", ""));
-
-                Console.WriteLine("Температура в \"" + location + "\": " + temp + "°С, время - " +
+                var stringTemp = Regex.Match(htmlCode, @"(?<=class=.today-temp.>)[+|-]\d*", RegexOptions.IgnoreCase);
+                
+                Console.WriteLine("Температура в \"" + location + "\": " + stringTemp.Value + "°С, время - " +
                                   System.DateTime.Now.ToLongTimeString() + ".");
             }
             catch
