@@ -26,11 +26,7 @@ namespace ParsDistance
 
                 string htmlCode = Encoding.UTF8.GetString(htmlData);
 
-                var pars1 = Regex.Split(htmlCode, "totalDistance\">");
-                var pars2 = Regex.Split(pars1[1], " ");
-
-                var dist = Convert.ToInt32(pars2[0].Substring(0, pars2[0].IndexOf('<')));
-                //или int dist = Convert.ToInt32(Regex.Replace(pars2[0], @"[^\d]+", ""));
+                string dist = Regex.Match(htmlCode, @"(?<=id=""totalDistance"">)\d*", RegexOptions.IgnoreCase).Value;
 
                 Console.WriteLine($"Дистанция с \"{locationFrom}\" в \"{locationTo}\" - {dist} км.");
             }
